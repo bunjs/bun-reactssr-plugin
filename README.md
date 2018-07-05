@@ -1,7 +1,7 @@
 # bun-reactssr-plugin
 bunkoa框架react项目ssr插件，基于react-router4.x
 
-##用法：
+## 用法：
 SSR方法接受5个参数：
 ctx: koa传递的上下文
 routesConfig：react-router-config对应的router配置文件
