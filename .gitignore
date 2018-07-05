@@ -1,0 +1,7 @@
+node_modules/
+*~
+._*
+.DS_Store
+build/
+webpack.config.js
+*report.txt
