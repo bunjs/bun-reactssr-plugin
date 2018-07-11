@@ -5,3 +5,4 @@ node_modules/
 build/
 webpack.config.js
 *report.txt
+package-lock.json
