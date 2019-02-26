@@ -14,7 +14,7 @@ const createHistory = _interopRequireDefault(_createMemoryHistory).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const SSR = (ctx, routesconfig, configureStore, initialState, cb) => {
+const SSR = ({ctx, routesconfig, configureStore, initialState}, cb) => {
     // let path = (ctx.path === '/' + appName) ? '/' : ctx.path.replace('/' + appName, '');
     let path = ctx.path;
     let history=createHistory();

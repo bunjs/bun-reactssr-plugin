@@ -18,7 +18,7 @@ function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { default: obj };
 }
 
-let SSR = (ctx, routesconfig, configureStore, initialState, cb) => {
+let SSR = ({ctx, routesconfig, configureStore, initialState}, cb) => {
     // let path = (ctx.path === '/' + appName) ? '/' : ctx.path.replace('/' + appName, '');
     let path = ctx.path;
     let history = createHistory();
