@@ -16,7 +16,7 @@ const renderRoutes = reactRouterConfig.renderRoutes;
 const renderToString = require('react-dom/server').renderToString; // import createHistory from 'history/createMemoryHistory';
 
 
-const _createMemoryHistory = require('history/createMemoryHistory');
+const _createMemoryHistory = require("history").createMemoryHistory;
 
 const createHistory = _interopRequireDefault(_createMemoryHistory).default;
 
@@ -28,13 +28,17 @@ function _interopRequireDefault(obj) {
 
 const SSR = ({
   ctx,
-  routesconfig,
-  configureStore,
+  serverRenderPath,
   initialState
 }, cb) => {
   // let path = (ctx.path === '/' + appName) ? '/' : ctx.path.replace('/' + appName, '');
   let path = ctx.path;
   let history = createHistory();
+
+  let base = require(serverRenderPath);
+
+  let routesConfig = base.routesConfig;
+  let configureStore = base.configureStore;
   let store = configureStore(initialState, history);
   let context = {};
   let renderHtml = renderToString(React.createElement(Provider, {
@@ -44,7 +48,7 @@ const SSR = ({
       pathname: path
     },
     context: context
-  }, renderRoutes(routesconfig))));
+  }, renderRoutes(routesConfig))));
 
   if (context.status === 404) {
     // 获取状态码并响应；

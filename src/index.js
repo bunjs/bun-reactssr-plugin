@@ -8,16 +8,19 @@ const reactRouterConfig = require('react-router-config');
 const renderRoutes = reactRouterConfig.renderRoutes;
 const renderToString = require('react-dom/server').renderToString;
 // import createHistory from 'history/createMemoryHistory';
-const _createMemoryHistory = require('history/createMemoryHistory');
+const _createMemoryHistory = require("history").createMemoryHistory;
 
 const createHistory = _interopRequireDefault(_createMemoryHistory).default;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const SSR = ({ctx, routesconfig, configureStore, initialState}, cb) => {
+const SSR = ({ctx, serverRenderPath, initialState}, cb) => {
     // let path = (ctx.path === '/' + appName) ? '/' : ctx.path.replace('/' + appName, '');
     let path = ctx.path;
     let history=createHistory();
+    let base = require(serverRenderPath);
+    let routesConfig = base.routesConfig;
+    let configureStore = base.configureStore;
     let store = configureStore(initialState, history);
     let context={};
 
@@ -25,7 +28,7 @@ const SSR = ({ctx, routesconfig, configureStore, initialState}, cb) => {
         <Provider store={store}>
             <StaticRouter
                 location={{ pathname: path }}
-                context={context}>{renderRoutes(routesconfig)}</StaticRouter>
+                context={context}>{renderRoutes(routesConfig)}</StaticRouter>
         </Provider>
     );
     if(context.status === 404) { // 获取状态码并响应；
