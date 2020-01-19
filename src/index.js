@@ -33,7 +33,7 @@ const SSR = ({ctx, serverRenderPath, initialState}, cb) => {
     );
     if(context.status === 404) { // 获取状态码并响应；
         ctx.status = 404;
-        ctx.body = '404 NOT FOUND';
+        ctx.body = `404 client router ${ctx.path} NOT FOUND`;
     } else if (context.status === 302) { // 获取状态码并响应；
         ctx.status = 302;
         ctx.redirect(context.url);
